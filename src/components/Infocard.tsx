@@ -17,13 +17,16 @@ const Userinfo: React.FC = () => {
     await axios
       .get("https://randomuser.me/api")
       .then((res) => setUser(res.data.results[0]));
+    localStorage.setItem("user", JSON.stringify(user));
   };
+
+  const data = localStorage.getItem("user");
 
   useEffect(() => {
     gettingData();
   }, [count]);
 
-  if (!user) {
+  if (Object.keys(user).length === 0) {
     return <div>Loading...</div>;
   } else {
     return (
